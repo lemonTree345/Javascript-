@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>评论-千纪凌</title>
+  <style>
+    div, body, ul, li { margin: 0; padding: 0 }
+    ul, li {
+      list-style: none;
+    }
+    .wrap {
+      width: 60%;
+      height: auto;
+      margin: 50px auto;
+    }
+    .wrap textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 20px;
+      border-color:#f1f1f1;
+      border-radius: 3px;
+      box-sizing: border-box;
+    }
+    .wrap textarea:focus {
+      outline: none !important;
+      border-color: #00d47d;
+    }
+    .submit-wrap {
+      padding: 20px 0;
+      text-align: right;
+    }
+    .submit-wrap a {
+      padding: 10px 60px;
+      background: #e6e6e6;
+      color: #a2a2a2;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all .3s ease-in-out;
+    }
+    .wrap.focused a {
+      background: #00d47d;
+      color: #fff;
+    }
+    .wrap.focused a:hover {
+      background: #00b369;
+    }
+    .comment-list li {
+      padding: 15px 0;
+      margin: 10px 0;
+      border-bottom: 1px solid #ededed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <textarea id="inputWrap" cols="760" maxlength="500" placeholder="输入评论..."></textarea>
+    <div class="submit-wrap"><a id="submit">提 交</a></div>
+    <ul class="comment-list"></ul>
+  </div>
+
+  <script type="text/javascript">
+    let oTxtarea = document.getElementById('inputWrap'),
+        oWrap = document.getElementsByClassName('wrap')[0],
+        oBtn = document.getElementById('submit'),
+        oList =  document.getElementsByClassName('comment-list')[0],
+        currentCom = null;
+
+    oTxtarea.onkeyup = function (e) {
+      const value = e.target.value;
+      oWrap.className = value.length > 0 ? 'wrap focused' : 'wrap';
+      currentCom = value;
+    }
+
+    oBtn.onclick = function () {
+      if (currentCom) {
+        oList.innerHTML += `<li>${currentCom}</li>`;
+        currentCom = null;
+        oTxtarea.value = '';
+        oWrap.className = 'wrap';
+      }
+    }
+  </script>
+</body>
+</html>

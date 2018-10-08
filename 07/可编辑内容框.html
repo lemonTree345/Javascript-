@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>可编辑内容框-千纪凌</title>
+  <style>
+    div, body, ul, li { margin: 0; padding: 0 }
+    ul, li {
+      list-style: none;
+    }
+    .wrap {
+      width: 60%;
+      height: auto;
+      margin: 50px auto;
+    }
+    .show {
+      display: inline-block;
+    }
+    .hide {
+      display: none;
+    }
+    .list li {
+      margin: 15px 0;
+      padding: 15px;
+      border-bottom: 1px solid #ededed;
+    }
+    .list li a {
+      margin-left: 10px;
+      text-decoration: none;
+      padding: 4px 14px;
+      color: #fff;
+      border-radius: 3px;
+      font-size: 14px;
+      transition: all .3s;
+    }
+    .list li a.modify {
+      background: #70c4ff;
+    }
+    .list li a.modify:hover {
+      background: #0096ff;
+    }
+    .list li a.save {
+      background: #58ca7b;
+    }
+    .list li a.save:hover {
+      background: #26b953;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <ul class="list">
+      <li>
+        <span class="show">first</span>
+        <input class="hide" type="text" />
+        <a href="javascript:void(0)" class="modify show">修 改</a>
+        <a href="javascript:void(0)" class="save hide">保 存</a>
+      </li>
+      <li>
+        <span class="show">two</span>
+        <input class="hide" type="text" />
+        <a href="javascript:void(0)" class="modify show">修 改</a>
+        <a href="javascript:void(0)" class="save hide">保 存</a>
+      </li>
+      <li>
+        <span class="show">theer</span>
+        <input class="hide" type="text" />
+        <a href="javascript:void(0)" class="modify show">修 改</a>
+        <a href="javascript:void(0)" class="save hide">保 存</a>
+      </li>
+    </ul>
+  </div>
+
+  <script type="text/javascript">
+    let oMbtn = document.getElementsByClassName('modify'),
+        mLen = oMbtn.length,
+        oSbtn = document.getElementsByClassName('save'),
+        sLen = oSbtn.length;
+
+    for (let i = 0; i < mLen; i++) {
+      oMbtn[i].onclick = (e) => {
+        let event = e.target.parentNode,
+            oSpan = event.getElementsByTagName('span')[0],
+            oInput = event.getElementsByTagName('input')[0],
+            oSave = event.getElementsByClassName('save')[0],
+            oModify = event.getElementsByClassName('modify')[0];
+        oInput.value = oSpan.innerText;
+        oSpan.className = 'hide';
+        oInput.className = 'show';
+        oModify.className = 'modify hide';
+        oSave.className = 'save show';
+      }
+      oSbtn[i].onclick = (e) => {
+        let event = e.target.parentNode,
+            oSpan = event.getElementsByTagName('span')[0],
+            oInput = event.getElementsByTagName('input')[0],
+            oSave = event.getElementsByClassName('save')[0],
+            oModify = event.getElementsByClassName('modify')[0];
+        oSpan.className = 'show';
+        oInput.className = 'hide';
+        oModify.className = 'modify show';
+        oSave.className = 'save hide';
+        oSpan.innerText = oInput.value;
+      }
+    }
+
+  </script>
+</body>
+</html>
